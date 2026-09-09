@@ -20,7 +20,7 @@ function Button({
   return (
     <button
       disabled={disabled || loading}
-      className={`inline-flex items-center justify-center gap-2 rounded-control px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-control px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${className}`}
       {...props}
     >
       {loading && <Spinner size="sm" />}

@@ -92,10 +92,10 @@ function TasksPage() {
         <div className="mx-auto flex max-w-3xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <span className="text-base font-semibold text-ink-900">Oasis</span>
           <div className="flex items-center justify-between gap-3 sm:justify-end">
-            <span className="truncate text-[13px] font-normal text-ink-500">
+            <span className="min-w-0 truncate text-[13px] font-normal text-ink-500">
               {user?.email}
             </span>
-            <Button variant="secondary" onClick={logout}>
+            <Button variant="secondary" onClick={logout} className="shrink-0">
               Log out
             </Button>
           </div>
