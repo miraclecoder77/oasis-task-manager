@@ -61,7 +61,7 @@ Target times are cumulative from the start.
       — *by 1:55*
 - [x] **M5** `feat:` API client, AuthContext, ProtectedRoute, login page
       — *by 2:25*
-- [ ] **M6** `feat:` task list, cards, status badges, create/edit modal
+- [x] **M6** `feat:` task list, cards, status badges, create/edit modal
       — *by 3:15*
 - [ ] **M7** `feat:` loading skeletons, error alerts, empty state
       — *by 3:25*
