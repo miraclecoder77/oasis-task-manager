@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node --watch --env-file=.env src/index.js",
     "start": "node --env-file=.env src/index.js",
+    "postinstall": "prisma generate",
     "migrate": "prisma migrate dev",
     "generate": "prisma generate",
     "seed": "node --env-file=.env prisma/seed.js"
