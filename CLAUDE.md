@@ -59,7 +59,7 @@ Target times are cumulative from the start.
       middleware, error handler — *by 1:05*
 - [x] **M4** `feat:` task CRUD with user scoping and Zod validation
       — *by 1:55*
-- [ ] **M5** `feat:` API client, AuthContext, ProtectedRoute, login page
+- [x] **M5** `feat:` API client, AuthContext, ProtectedRoute, login page
       — *by 2:25*
 - [ ] **M6** `feat:` task list, cards, status badges, create/edit modal
       — *by 3:15*
