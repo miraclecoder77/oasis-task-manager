@@ -66,7 +66,7 @@ Target times are cumulative from the start.
 - [x] **M7** `feat:` loading skeletons, error alerts, empty state
       — *by 3:25*
 - [x] **M8** `feat:` responsive pass, verified at 375px — *by 3:35*
-- [ ] **M9** `docs:` README with setup, credentials, priorities,
+- [x] **M9** `docs:` README with setup, credentials, priorities,
       trade-offs — *by 4:00*
 
 If a milestone runs more than 40 minutes, stop and report. Do not
