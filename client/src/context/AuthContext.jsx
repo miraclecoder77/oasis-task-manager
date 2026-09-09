@@ -9,6 +9,7 @@ import {
 import { useQueryClient } from '@tanstack/react-query';
 import * as authApi from '../api/auth.js';
 import {
+  ApiError,
   clearToken,
   getToken,
   setToken,
@@ -43,34 +44,34 @@ export function AuthProvider({ children }) {
     setUnauthorizedHandler(logout);
   }, [logout]);
 
-  useEffect(() => {
-    let cancelled = false;
+  const restoreSession = useCallback(async () => {
+    if (!getToken()) {
+      setStatus('anonymous');
+      return;
+    }
 
-    const restoreSession = async () => {
-      if (!getToken()) {
+    setStatus('checking');
+
+    try {
+      const { user: currentUser } = await authApi.fetchCurrentUser();
+      setUser(currentUser);
+      setStatus('authenticated');
+    } catch (error) {
+      // Only a rejected token means the session is over. An unreachable API is
+      // a transient failure, and signing the user out would discard a token
+      // that is still valid.
+      if (error instanceof ApiError && error.status === 401) {
+        setUser(null);
         setStatus('anonymous');
-        return;
+      } else {
+        setStatus('error');
       }
-
-      try {
-        const { user: currentUser } = await authApi.fetchCurrentUser();
-        if (cancelled) return;
-        setUser(currentUser);
-        setStatus('authenticated');
-      } catch {
-        // A rejected token has already been cleared by the API client.
-        if (!cancelled) {
-          setUser(null);
-          setStatus('anonymous');
-        }
-      }
-    };
-
-    restoreSession();
-    return () => {
-      cancelled = true;
-    };
+    }
   }, []);
+
+  useEffect(() => {
+    restoreSession();
+  }, [restoreSession]);
 
   const login = useCallback(async (email, password) => {
     const { token, user: loggedInUser } = await authApi.login(email, password);
@@ -86,10 +87,12 @@ export function AuthProvider({ children }) {
       status,
       isAuthenticated: status === 'authenticated',
       isChecking: status === 'checking',
+      hasSessionError: status === 'error',
+      retrySession: restoreSession,
       login,
       logout,
     }),
-    [user, status, login, logout]
+    [user, status, restoreSession, login, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -3,8 +3,9 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { useTasks, useCreateTask, useUpdateTask } from '../hooks/useTasks.js';
 import { FILTERS } from '../lib/status.js';
 import Button from '../components/ui/Button.jsx';
-import Spinner from '../components/ui/Spinner.jsx';
 import Alert from '../components/ui/Alert.jsx';
+import SkeletonCard from '../components/ui/SkeletonCard.jsx';
+import EmptyState from '../components/ui/EmptyState.jsx';
 import TaskList from '../components/TaskList.jsx';
 import TaskFormModal from '../components/TaskFormModal.jsx';
 
@@ -19,6 +20,11 @@ function TasksPage() {
 
   const createTask = useCreateTask();
   const updateTask = useUpdateTask();
+
+  const isFiltered = statusFilter !== '';
+  const activeFilterLabel = FILTERS.find(
+    (filter) => filter.value === statusFilter
+  )?.label;
 
   const openCreate = () => {
     setEditingTask(null);
@@ -37,6 +43,47 @@ function TasksPage() {
       await createTask.mutateAsync(payload);
     }
     setModalOpen(false);
+  };
+
+  // Exactly one of loading, error, empty or success is rendered.
+  const renderTasks = () => {
+    if (isPending) {
+      return (
+        <div className="flex flex-col gap-3" aria-busy="true">
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </div>
+      );
+    }
+
+    if (isError) {
+      return (
+        <Alert title="Could not load tasks" onRetry={refetch}>
+          {error.message}
+        </Alert>
+      );
+    }
+
+    if (tasks.length === 0) {
+      return isFiltered ? (
+        <EmptyState
+          title="No matching tasks"
+          description={`Nothing here with the "${activeFilterLabel}" status. Try another filter.`}
+          actionLabel="Show all tasks"
+          onAction={() => setStatusFilter('')}
+        />
+      ) : (
+        <EmptyState
+          title="No tasks yet"
+          description="Create your first task to get started."
+          actionLabel="New task"
+          onAction={openCreate}
+        />
+      );
+    }
+
+    return <TaskList tasks={tasks} onEdit={openEdit} />;
   };
 
   return (
@@ -85,29 +132,7 @@ function TasksPage() {
           </Button>
         </div>
 
-        <div className="mt-6">
-          {isPending && (
-            <div className="flex justify-center py-8 text-brand-500">
-              <Spinner size="lg" />
-            </div>
-          )}
-
-          {isError && (
-            <Alert title="Could not load tasks" onRetry={refetch}>
-              {error.message}
-            </Alert>
-          )}
-
-          {!isPending && !isError && tasks.length === 0 && (
-            <p className="py-8 text-center text-sm text-ink-500">
-              No tasks to show.
-            </p>
-          )}
-
-          {!isPending && !isError && tasks.length > 0 && (
-            <TaskList tasks={tasks} onEdit={openEdit} />
-          )}
-        </div>
+        <div className="mt-6">{renderTasks()}</div>
       </main>
 
       <TaskFormModal
