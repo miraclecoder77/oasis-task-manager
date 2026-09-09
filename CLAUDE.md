@@ -57,7 +57,7 @@ Target times are cumulative from the start.
       and sample tasks — *by 0:40*
 - [x] **M3** `feat:` login endpoint, JWT signing, authenticate
       middleware, error handler — *by 1:05*
-- [ ] **M4** `feat:` task CRUD with user scoping and Zod validation
+- [x] **M4** `feat:` task CRUD with user scoping and Zod validation
       — *by 1:55*
 - [ ] **M5** `feat:` API client, AuthContext, ProtectedRoute, login page
       — *by 2:25*
