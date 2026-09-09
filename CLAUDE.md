@@ -55,7 +55,7 @@ Target times are cumulative from the start.
       env examples — *by 0:25*
 - [x] **M2** `feat:` Prisma schema, migration, seeder with one test user
       and sample tasks — *by 0:40*
-- [ ] **M3** `feat:` login endpoint, JWT signing, authenticate
+- [x] **M3** `feat:` login endpoint, JWT signing, authenticate
       middleware, error handler — *by 1:05*
 - [ ] **M4** `feat:` task CRUD with user scoping and Zod validation
       — *by 1:55*
