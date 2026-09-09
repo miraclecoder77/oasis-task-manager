@@ -53,7 +53,7 @@ Target times are cumulative from the start.
 
 - [x] **M1** `chore:` scaffold server + client, Tailwind v4, .gitignore,
       env examples — *by 0:25*
-- [ ] **M2** `feat:` Prisma schema, migration, seeder with one test user
+- [x] **M2** `feat:` Prisma schema, migration, seeder with one test user
       and sample tasks — *by 0:40*
 - [ ] **M3** `feat:` login endpoint, JWT signing, authenticate
       middleware, error handler — *by 1:05*
