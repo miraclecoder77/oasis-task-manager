@@ -1,10 +1,17 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import TasksPage from './pages/TasksPage.jsx';
+
 function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
-      <div className="rounded-card border border-ink-300 bg-white p-4 text-ink-700">
-        Oasis Task Manager — scaffold running.
-      </div>
-    </div>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/tasks" element={<TasksPage />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/tasks" replace />} />
+    </Routes>
   );
 }
 
