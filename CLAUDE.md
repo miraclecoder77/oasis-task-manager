@@ -51,7 +51,7 @@ Do not mark a milestone complete because the code compiles.
 
 Target times are cumulative from the start.
 
-- [ ] **M1** `chore:` scaffold server + client, Tailwind v4, .gitignore,
+- [x] **M1** `chore:` scaffold server + client, Tailwind v4, .gitignore,
       env examples — *by 0:25*
 - [ ] **M2** `feat:` Prisma schema, migration, seeder with one test user
       and sample tasks — *by 0:40*
