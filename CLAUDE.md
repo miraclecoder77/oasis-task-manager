@@ -65,7 +65,7 @@ Target times are cumulative from the start.
       — *by 3:15*
 - [x] **M7** `feat:` loading skeletons, error alerts, empty state
       — *by 3:25*
-- [ ] **M8** `feat:` responsive pass, verified at 375px — *by 3:35*
+- [x] **M8** `feat:` responsive pass, verified at 375px — *by 3:35*
 - [ ] **M9** `docs:` README with setup, credentials, priorities,
       trade-offs — *by 4:00*
 
